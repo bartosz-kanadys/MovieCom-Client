@@ -5,8 +5,8 @@ var router = express.Router();
 
 router.get("/", movieController.getAll);
 
-router.get("/test", function(req, res, next) {
-    res.send("TEST GIT");
-});
+router.get('/:id', movieController.getById)
+
+router.post('/insert', movieController.create)
 
 module.exports = router;
