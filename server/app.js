@@ -6,7 +6,7 @@ var logger = require('morgan');
 
 const cors = require('cors');
 
-var usersRouter = require('./routes/users');
+var usersRouter = require('./routes/usersRoute');
 var moviesRouter = require("./routes/moviesRoute");
 var authorizationRouter = require('./routes/authorizationRoute')
 
