@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { Movie } = require('../models/MovieModel')
+const { Movie } = require('../models/MovieModel');
+const { User } = require('../models/UserModel');
 
 
 module.exports = {
@@ -52,6 +53,15 @@ module.exports = {
             console.log(filter)
             await Movie.findOneAndUpdate(filter, update)
             res.status(200).json({msg: "Updated"})
+        } catch (error) {
+            res.status(500).json({error: "Internal error server"})
+        }
+    },
+
+    async delete(req, res) {
+        try {
+            await Movie.findByIdAndDelete(req.params.id)
+            res.status(200).json({msg: "Usunięto z bazy"})
         } catch (error) {
             res.status(500).json({error: "Internal error server"})
         }

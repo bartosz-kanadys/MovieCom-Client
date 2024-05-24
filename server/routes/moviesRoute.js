@@ -8,11 +8,12 @@ router.get('/id/:id', movieController.getById)
 router.get('/title/:title', movieController.getByTitle)
 
 //POST - CREATE
-router.post('/insert', movieController.create)
+router.post('/', movieController.create)
 
 //UPDATE
-router.put('/update', movieController.update)
+router.put('/', movieController.update)
 
 //DELETE
+router.delete('/:id', movieController.delete)
 
 module.exports = router;
