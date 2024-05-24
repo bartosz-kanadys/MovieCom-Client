@@ -1,5 +1,6 @@
 var express = require("express");
 const movieController = require("../controllers/movieController");
+const authorizationController = require("../controllers/authorizationController");
 var router = express.Router();
 
 //GET - READ
@@ -14,6 +15,10 @@ router.post('/', movieController.create)
 router.put('/', movieController.update)
 
 //DELETE
-router.delete('/:id', movieController.delete)
+router.delete('/:id',
+    authorizationController.authenticate,
+    authorizationController.checkRole(['admin']),
+    movieController.delete
+)
 
 module.exports = router;
