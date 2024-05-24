@@ -70,7 +70,7 @@ module.exports = {
                 });
             });
 
-            res.status(200).json({
+            res.status(201).json({
                 status: 201,
                 success: true,
                 message: "Zarejestrowano użytkownika"
