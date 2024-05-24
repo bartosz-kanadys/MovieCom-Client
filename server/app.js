@@ -9,6 +9,7 @@ const cors = require('cors');
 var usersRouter = require('./routes/usersRoute');
 var moviesRouter = require("./routes/moviesRoute");
 var authorizationRouter = require('./routes/authorizationRoute')
+var commentRouter = require('./routes/commentsRoute')
 
 var app = express();
 
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', authorizationRouter);
 app.use('/users', usersRouter);
 app.use("/movies", moviesRouter);
+app.use('/comments', commentRouter)
 app.use(cors())
 
 // catch 404 and forward to error handler
