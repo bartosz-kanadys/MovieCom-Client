@@ -7,6 +7,7 @@ var router = express.Router();
 router.get("/", movieController.getAll);
 router.get('/id/:id', movieController.getById)
 router.get('/title/:title', movieController.getByTitle)
+router.get('/limit', movieController.get10)
 
 //POST - CREATE
 router.post('/', movieController.create)
