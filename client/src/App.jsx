@@ -1,26 +1,26 @@
-import React, {useEffect, useState} from 'react'
-import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+// import axios from 'axios';
+// import Movie from './components/MovieCard';
+import './App.css'
+import './index.css'
+// import Header from './components/Header/Header';
+// import InfiniteScroll from "react-infinite-scroll-component";
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import HomePage from './components/HomePage/HomePage';
+
 
 
 function App() {
-  
-  const [backendData, setBackendData] = useState(";)")
-
-  // TESTING API
-  const apiCall = () => {
-    axios.get('http://localhost:9000/testAPI/test').then((data) => {
-      setBackendData(data.data)
-    })
-  }
+ 
 
   return (
-    <>
-    <button onClick={apiCall}>Make API Call</button>
-      <div>
-      
-      <p>{backendData}</p>
-      </div>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<HomePage></HomePage>}></Route>
+        <Route path='/:title' element={<HomePage></HomePage>}></Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
