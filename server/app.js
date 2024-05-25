@@ -21,12 +21,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(cors({
+  origin: 'http://localhost:5173' // Zmień na adres swojej aplikacji frontendowej
+}));
 app.use('/', authorizationRouter);
 app.use('/users', usersRouter);
 app.use("/movies", moviesRouter);
 app.use('/comments', commentRouter)
-app.use(cors())
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
