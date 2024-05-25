@@ -4,13 +4,13 @@ function Movie(props) {
     return (
         <div className="p-10 grid place-items-center font-mono ">
 
-            <div className="xs:min-w-96 bg-white rounded-md bg-gray-800 shadow-lg max-w-2xl min-h-96">
+            <div className="xs:min-w-96 bg-white rounded-md shadow-lg max-w-2xl min-h-96">
                 <div className="lg:flex px-4 leading-none " >
                     <div className="flex-none  ">
                         <img
                             src={props.poster}
                             alt="pic"
-                            className="xs:m-auto h-70 w-56 rounded-md shadow-2xl transform -translate-y-4 border-4 border-gray-300 shadow-lg"
+                            className="xs:m-auto h-70 w-56 rounded-md  transform -translate-y-4 border-4 border-gray-300 shadow-lg"
                         />
                     </div>
 
