@@ -5,9 +5,6 @@ import '../../App.css'
 import '../../index.css'
 import Header from '../Header/Header';
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useParams } from 'react-router-dom'
-
-
 
 function HomePage() {
     const [allMovies, setAllMovies] = useState([])
@@ -15,16 +12,13 @@ function HomePage() {
     const [index, setIndex] = useState(6);
     const [search, setSearch] = useState("")
 
-    const params = useParams()
-
-
     useEffect(() => {
-       fetchData()
+        fetchData()
     }, [])
 
     useEffect(() => {
         fetchData()
-    },[search])
+    }, [search])
 
     const fetchData = () => {
         const fetchData = async () => {
@@ -80,8 +74,6 @@ function HomePage() {
                         }
                     </div>
                 </InfiniteScroll>
-
-
             </div>
         </>
     )

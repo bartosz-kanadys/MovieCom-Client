@@ -30,18 +30,15 @@ function Movie(props) {
                             Votes: {props.votes}
                         </p>
                         <p className='w-full'>
-            
+
                             <a href="#" className="items-center justify-center flex mb-4 mt-7 m-auto w-3/5 text-white bg-blue-700    font-bold rounded-lg text-lg p-3  dark:hover:bg-blue-900 ">Comments</a>
 
                         </p>
-
                     </div>
-
                 </div>
             </div>
         </div>
     )
-
 }
 
 export default Movie
