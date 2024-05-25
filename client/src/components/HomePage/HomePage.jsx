@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import Movie from '../MovieCard/MovieCard';
 import '../../App.css'
-import '../../index.css'
 import Header from '../Header/Header';
 import InfiniteScroll from "react-infinite-scroll-component";
 
