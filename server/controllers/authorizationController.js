@@ -10,7 +10,9 @@ var roles = require('../roles')
 module.exports = {
     async authenticate(req, res, next) {
         const authHeader = req.headers
-        const token = authHeader['authorization']
+        // const token = authHeader['authorization']
+        const token = req.cookies.JWT
+        console.log(token)
         if (token == null || token == '') return res.status(401).json({ message: 'Unauthorized' })
 
         jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
@@ -40,16 +42,18 @@ module.exports = {
             const isLoginExist = await User.findOne({ login: login })
 
             if (isEmailExist) {
-                res.status(400).json({
-                    status: 400,
+                res.json({
+                    status: 409,
+                    success: false,
                     message: "Email istnieje już w bazie",
                 });
                 return;
             }
 
             if (isLoginExist) {
-                res.status(400).json({
-                    status: 400,
+                res.json({
+                    status: 409,
+                    success: false,
                     message: "Login istnieje już w bazie",
                 });
                 return;
@@ -92,12 +96,12 @@ module.exports = {
             const loggingUser = await User.findOne({ login: login })
 
             if (!loggingUser) {
-                res.status(404).json({
+                res.json({
                     status: 404,
                     success: false,
                     message: "User not found"
                 })
-                return
+                
             }
 
             const hashedPass = loggingUser?.password
@@ -112,8 +116,13 @@ module.exports = {
                             role: loggingUser?.role
                         },
                         process.env.TOKEN_SECRET,
-                        { expiresIn: 6000 }
+                        { expiresIn: "20m" }
                     )
+
+                    res.cookie("JWT", accesToken, {
+                        httpOnly: true,
+                        secure: false
+                    })
 
                     res.status(200).json({
                         status: 200,
@@ -122,15 +131,15 @@ module.exports = {
                         token: accesToken,
                     });
                 } else {
-                    res.status(404).json({
+                    res.json({
                         status: 404,
                         success: true,
-                        message: "login failed",
+                        message: "Login failed",
                     });
                 }
             });
         } catch (error) {
-            res.status(400).json({
+            res.json({
                 status: 400,
                 message: error.message.toString(),
             });

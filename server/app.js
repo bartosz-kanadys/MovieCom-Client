@@ -16,13 +16,23 @@ var app = express();
 const mongo = require('./database/mongo_connection')
 
 
+
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', "http://localhost:9000");
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors({
-  origin: 'http://localhost:5173' // Zmień na adres swojej aplikacji frontendowej
+  origin: 'http://localhost:5173', // Zmień na adres swojej aplikacji frontendowej
+  credential: true
 }));
 app.use('/', authorizationRouter);
 app.use('/users', usersRouter);
@@ -32,7 +42,7 @@ app.use('/comments', commentRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  next(createError(404));
+  next(createError(404))
 });
 
 // error handler
