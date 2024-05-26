@@ -37,17 +37,13 @@ module.exports = {
 
     async get10(req, res) {
         var title = req.query.title
-        console.log(title)
         if (title == null || title === "" || title === 'undefined'){
             title = ".*"
-            console.log("weszoo")
         }
-        console.log(title)
         try {
             const movies = await Movie.find({title: new RegExp(title, 'i')})
                 .skip(req.query.skip)
                 .limit(req.query.limit)
-            console.log(new RegExp(title))
             res.status(200).json(movies)
         } catch (error) {
             res.status(500).json({error: "Internal error server"})
@@ -69,7 +65,6 @@ module.exports = {
         try {
             const filter = req.body.filter
             const update = req.body.update
-            console.log(filter)
             await Movie.findOneAndUpdate(filter, update)
             res.status(200).json({msg: "Updated"})
         } catch (error) {
