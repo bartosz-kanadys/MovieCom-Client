@@ -113,8 +113,8 @@ module.exports = {
                         success: true,
                         message: "Login failed",
                     });
-                   return
-                };
+                    return
+                }
                 if (result === true) {
                     const accesToken = jwt.sign(
                         {
@@ -123,7 +123,7 @@ module.exports = {
                             role: loggingUser?.role
                         },
                         process.env.TOKEN_SECRET,
-                        { expiresIn: "1m" }
+                        { expiresIn: "10m" }
                     )
 
                     res.cookie("JWT", accesToken, {
@@ -137,7 +137,7 @@ module.exports = {
                         message: "login success",
                         login: loggingUser?.login,
                         token: accesToken,
-                    });
+                    })
                 } else {
                     res.json({
                         status: 404,
@@ -155,8 +155,8 @@ module.exports = {
     },
 
     async logout(req, res, nect) {
-        res.cookie("JWT", "", {
-            httpOnly: flase,
+        res.cookie("JWT", 45456, {
+            httpOnly: false,
             secure: false
         })
 
