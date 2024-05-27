@@ -1,33 +1,12 @@
 import Input from "../Inputs/Input"
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useAuth } from "../Auth/AuthProvider";
 
 function LoginPage() {
     const [login, setLogin] = useState("")
     const [password, setPassword] = useState("")
-    const [serverData, setServerData] = useState(null)
 
-    const logging = async () => {
-        await axios.post('http://localhost:9000/login', {
-            login,
-            password
-        }, { withCredentials: true })
-            .then(response => {
-                setServerData(response)
-                console.log(response)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }
-
-    const onLoginChange = (event) => {
-        setLogin(event.target.value)
-    }
-
-    const onPasswordChange = (event) => {
-        setPassword(event.target.value)
-    }
+    const auth = useAuth()
 
     return (
         <section className="bg-gray-50 dark:bg-gray-800">
@@ -47,20 +26,20 @@ function LoginPage() {
                                 type="text"
                                 id="login"
                                 placeholder="Your Login"
-                                onChange={onLoginChange}
+                                onChange={() => setLogin(event.target.value)}
                             />
                             <Input
                                 label="Password"
                                 type="password"
                                 id="password"
                                 placeholder="**********"
-                                onChange={onPasswordChange}
+                                onChange={() => setPassword(event.target.value)}
                             />
                         </form>
-                        <button onClick={logging} className="bg-blue-800 w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
+                        <button onClick={() => auth.loginAction(login, password)} className="bg-blue-800 w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
 
                         <p>
-                            {serverData ? <p>{serverData.data.message}</p> : <></>}
+                            {!auth.loginSucces ? <p>Login failed</p> : <></>}
                         </p>
 
                         <p className="text-sm font-light text-gray-500 dark:text-gray-400">
