@@ -50,9 +50,10 @@ function HomePage() {
                     next={fetchMoreData}
                     hasMore={hasMore}
                 >
-                    <div id='main' className="grid  md:grid-cols-2 gap-1 p-1 max-w-7xl  ">
+                    
                         {allMovies.length > 0 ?
                             <>
+                            <div id='main' className="grid  md:grid-cols-2 gap-1 p-1 max-w-7xl  ">
                                 {allMovies.map((movie) => {
                                     return (
                                         <Movie
@@ -67,11 +68,12 @@ function HomePage() {
                                         ></Movie>
                                     )
                                 })}
+                                </div>
                             </>
                             :
-                            <p>Brak filmow w bazie</p>
+                            <p className='w-full text-center text-lg  font-bold'>Brak filmow w bazie</p>
                         }
-                    </div>
+                    
                 </InfiniteScroll>
             </div>
         </>
