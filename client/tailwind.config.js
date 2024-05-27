@@ -4,7 +4,11 @@ export default {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      spacing: {
+        '460': '460px'
+      }
+    },
     screens: {
       'xs': '100px',
       // => @media (min-width: 100px) { ... }
@@ -22,7 +26,8 @@ export default {
 
       '2xl': '1536px',
       // => @media (min-width: 1536px) { ... }
-    }
+    },
+    
   },
   plugins: [],
 }

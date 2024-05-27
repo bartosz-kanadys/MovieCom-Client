@@ -4,7 +4,7 @@ function Movie(props) {
     return (
         <div className="p-10 grid place-items-center font-mono ">
 
-            <div className="xs:min-w-96 bg-white rounded-md shadow-lg max-w-2xl min-h-96">
+            <div className="xs:min-w-96 bg-white rounded-md shadow-lg max-w-2xl min-h-460">
                 <div className="lg:flex px-4 leading-none " >
                     <div className="flex-none  ">
                         <img
@@ -12,6 +12,9 @@ function Movie(props) {
                             alt="pic"
                             className="xs:m-auto h-70 w-56 rounded-md  transform -translate-y-4 border-4 border-gray-300 shadow-lg"
                         />
+                        <p className='w-full'>
+                            <a href="#" className="items-center justify-center flex mb-4 mt-7 m-auto w-full text-white bg-blue-700    font-bold rounded-lg text-lg p-3  dark:hover:bg-blue-900 ">Comments</a>
+                        </p>
                     </div>
 
                     <div className="flex-col text-gray-800 ">
@@ -22,18 +25,16 @@ function Movie(props) {
                             <span className="font-bold"> {props.runtime} min | {props.genres}</span>
                             <span className="font-bold"></span>
                         </div>
-                        <p className="hidden md:block px-4 my-4 text-sm text-left"> {props.plot} </p>
+                        <p className="hidden md:block px-4 my-4 text-justify text-sm text-left"> {props.plot} </p>
 
-                        <p className=" flex text-md px-4 my-2">
+                        <p className=" flex text-md px-4 my-8">
                             Rating: {props.rating}
                             <span className="font-bold px-2">|</span>
                             Votes: {props.votes}
                         </p>
-                        <p className='w-full'>
-
+                        {/* <p className='w-full'>
                             <a href="#" className="items-center justify-center flex mb-4 mt-7 m-auto w-3/5 text-white bg-blue-700    font-bold rounded-lg text-lg p-3  dark:hover:bg-blue-900 ">Comments</a>
-
-                        </p>
+                        </p> */}
                     </div>
                 </div>
             </div>

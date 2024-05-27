@@ -71,7 +71,7 @@ function HomePage() {
                                 </div>
                             </>
                             :
-                            <p className='w-full text-center text-lg  font-bold'>Brak filmow w bazie</p>
+                            <p className='w-full text-center text-lg text-white font-bold'>Brak filmow w bazie</p>
                         }
                     
                 </InfiniteScroll>
