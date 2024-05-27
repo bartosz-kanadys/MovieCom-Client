@@ -2,15 +2,25 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import HomePage from './components/HomePage/HomePage';
 import LoginPage from './components/Login/LoginPage';
 import RegisterPage from './components/Register/RegisterPage';
+import AuthProvider from './components/Auth/AuthProvider';
+import PrivateRoute from './components/Auth/PrivateRoute';
+import ProfilPage from './components/Profil/ProfilPage'
+
 
 function App() {
+
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<HomePage />}></Route>
-        <Route path='/login' element={<LoginPage />}></Route>
-        <Route path='/register' element={<RegisterPage />}></Route>
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path='/' element={<HomePage />}></Route>
+          <Route path='/login' element={<LoginPage />}></Route>
+          <Route path='/register' element={<RegisterPage />}></Route>
+          <Route element={<PrivateRoute />}>
+            <Route path='/profil' element={<ProfilPage />} />
+          </Route>
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   )
 }
