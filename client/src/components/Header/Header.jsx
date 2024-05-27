@@ -1,9 +1,46 @@
+import { useEffect, useState } from "react";
+import { useAuth } from "../Auth/AuthProvider"
+import GuestButtons from "./GuestButtons"
+import LoggedButtons from "./LoggedButtons"
+import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
+import axios from 'axios';
+
 function Header({ search, setSearch }) {
+    const [tokenData, setTokenData] = useState({ login: "" })
+    const [test, setTest] = useState("")
+    const auth = useAuth()
 
     function handleChange(event) {
         setSearch(event.target.value)
 
     }
+
+    useEffect(() => {
+        const token = Cookies.get('JWT')
+        if (token) {
+            const decodedToken = jwtDecode(token)
+            console.log(decodedToken)
+            setTokenData(decodedToken)
+        } else {
+            setTokenData(null)
+        }
+    }, [])
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            if (tokenData != null) {
+
+                if (Date.now() >= tokenData.exp) {
+                    //axios.post('http://localhost:9000/logout',{ withCredentials: true })
+                    Cookies.set("JWT", "")
+                }
+            }
+
+        }, 1000);
+
+        return () => clearInterval(intervalId)
+    }, []);
 
     return (
         <header className="min-w-96">
@@ -13,11 +50,12 @@ function Header({ search, setSearch }) {
                         <img src="https://flowbite.com/docs/images/logo.svg" className="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
                         <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">MovieCom</span>
                     </a>
-                    <div className="flex items-center lg:order-2">
-                        <a href='/login' className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">Log in</a>
-                        <a href="/register" className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">Register</a>
-
-                    </div>
+                    {
+                        Cookies.get('JWT') ?
+                            <LoggedButtons login={tokenData.login} />
+                            :
+                            <GuestButtons />
+                    }
 
                     <form id='search' className="w-4/6 m-auto pb-4 pt-4 sm:w-full md:w-full lg:w-3/5 xs:w-full">
                         <label for="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
