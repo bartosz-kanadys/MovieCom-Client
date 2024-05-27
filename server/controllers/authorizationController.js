@@ -101,13 +101,20 @@ module.exports = {
                     success: false,
                     message: "User not found"
                 })
-                
+                return
             }
 
             const hashedPass = loggingUser?.password
 
             bcrypt.compare(password, hashedPass, (err, result) => {
-                if (err) throw err;
+                if (err) {
+                    res.json({
+                        status: 404,
+                        success: true,
+                        message: "Login failed",
+                    });
+                   return
+                };
                 if (result === true) {
                     const accesToken = jwt.sign(
                         {
@@ -116,11 +123,11 @@ module.exports = {
                             role: loggingUser?.role
                         },
                         process.env.TOKEN_SECRET,
-                        { expiresIn: "20m" }
+                        { expiresIn: "1m" }
                     )
 
                     res.cookie("JWT", accesToken, {
-                        httpOnly: true,
+                        httpOnly: false,
                         secure: false
                     })
 
@@ -128,6 +135,7 @@ module.exports = {
                         status: 200,
                         success: true,
                         message: "login success",
+                        login: loggingUser?.login,
                         token: accesToken,
                     });
                 } else {
@@ -144,7 +152,19 @@ module.exports = {
                 message: error.message.toString(),
             });
         }
+    },
 
+    async logout(req, res, nect) {
+        res.cookie("JWT", "", {
+            httpOnly: flase,
+            secure: false
+        })
+
+        res.status(200).json({
+            status: 200,
+            success: true,
+            message: "logout success",
+        });
     }
 }
 
