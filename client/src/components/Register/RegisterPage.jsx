@@ -129,13 +129,13 @@ function RegisterPage() {
                                 placeholder="**********"
                                 onChange={onPasswordChange}
                             />
-                            <p></p>
-                            {errors.login == null ? <></> : <span>{errors.login}<br></br></span>}
-                            {errors.email == null ? <></> : <span>{errors.email}<br></br></span>}
-                            {errors.password == null ? <></> : <span>{errors.password}<br></br></span>}
-
+                            <p className='text-white'>
+                                {errors.login == null ? <></> : <span>{errors.login}<br></br></span>}
+                                {errors.email == null ? <></> : <span>{errors.email}<br></br></span>}
+                                {errors.password == null ? <></> : <span>{errors.password}<br></br></span>}
+                            </p>
                             <p>
-                                { serverData ? <p>{serverData.data.message}</p> : <></>}
+                                {serverData ? <p>{serverData.data.message}</p> : <></>}
                             </p>
 
                         </form>
