@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react'
-import Header from '../Header/Header'
-import { useParams } from 'react-router-dom';
 import '../MovieCard/movieCard.css'
 import axios from 'axios';
-
 
 function MoviePanel(props) {
     const [movie, setMovie] = useState(null)
@@ -26,7 +23,6 @@ function MoviePanel(props) {
         <>
             {movie ?
                 <div className="px-5 pt-5 grid place-items-center font-mono ">
-
                     <div className="xs:min-w-96 bg-white rounded-md shadow-lg max-w-5xl min-h-460">
                         <div className="lg:flex px-4 leading-none " >
                             <div className="flex-none mt-5 ">
@@ -35,11 +31,8 @@ function MoviePanel(props) {
                                     alt="pic"
                                     className="xs:m-auto h-70 w-56 rounded-md   shadow-lg "
                                 />
-
                             </div>
-
                             <div className="flex-col px-4 pb-9 text-gray-800 ">
-
                                 <p className="pt-4 text-2xl font-bold">{movie.title} ({movie.year})</p>
                                 <hr className="w-11/12 h-2px mx-auto  border-0 rounded md:my-5 dark:bg-gray-700" data-content=""></hr>
                                 <div className="text-md flex justify-between  my-2">

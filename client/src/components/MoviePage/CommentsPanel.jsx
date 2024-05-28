@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
 import '../MovieCard/movieCard.css'
 import Comment from './Comment';
 import axios from 'axios';
@@ -22,10 +21,9 @@ function CommentsPanel(props) {
         fetchData()
     }
 
-
     return (
         <div className='p-5'>
-            <div className='bg-white max-w-5xl m-auto rounded-md pb-6 '>
+            <div className='bg-white max-w-5xl m-auto rounded-md pb-5 '>
                 {comments.length ?
                     comments.map(comment => {
                         return (
@@ -37,7 +35,7 @@ function CommentsPanel(props) {
                         )
                     })
                     :
-                    <p className='font-bold text-xl pt-5'>No comments </p>
+                    <p className='font-bold text-lg pt-5'>No comments </p>
                 }
 
             </div>
