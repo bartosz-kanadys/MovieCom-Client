@@ -50,13 +50,14 @@ function HomePage() {
                     next={fetchMoreData}
                     hasMore={hasMore}
                 >
-                    
-                        {allMovies.length > 0 ?
-                            <>
-                            <div id='main' className="grid  md:grid-cols-2 gap-1 p-1 max-w-7xl  ">
+
+                    {allMovies.length > 0 ?
+                        <>
+                            <div href="/" id='main' className="grid  md:grid-cols-2 gap-1 p-1 max-w-7xl  ">
                                 {allMovies.map((movie) => {
                                     return (
                                         <Movie
+                                            id={movie._id}
                                             title={movie.title}
                                             poster={movie.poster}
                                             genres={movie.genres.join(", ")}
@@ -68,12 +69,12 @@ function HomePage() {
                                         ></Movie>
                                     )
                                 })}
-                                </div>
-                            </>
-                            :
-                            <p className='w-full text-center text-lg text-white font-bold'>Brak filmow w bazie</p>
-                        }
-                    
+                            </div>
+                        </>
+                        :
+                        <p className='w-full text-center text-lg text-white font-bold'>Brak filmow w bazie</p>
+                    }
+
                 </InfiniteScroll>
             </div>
         </>
