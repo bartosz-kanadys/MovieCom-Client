@@ -7,7 +7,8 @@ export default {
     extend: {
       spacing: {
         '440px': '440px',
-        '2px': '2px'
+        '2px': '2px',
+        '1px': '1px'
       },
       colors: {
         app: '#1F2937',
