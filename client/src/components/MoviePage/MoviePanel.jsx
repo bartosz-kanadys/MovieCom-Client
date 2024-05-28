@@ -9,9 +9,6 @@ function MoviePanel(props) {
     const [movie, setMovie] = useState(null)
 
     useEffect(() => {
-
-        console.log(props.id)
-        console.log("fff")
         fetchData()
     }, [])
 
@@ -24,10 +21,11 @@ function MoviePanel(props) {
 
         fetchData()
     }
+
     return (
         <>
             {movie ?
-                <div className="p-10 grid place-items-center font-mono ">
+                <div className="px-5 pt-5 grid place-items-center font-mono ">
 
                     <div className="xs:min-w-96 bg-white rounded-md shadow-lg max-w-5xl min-h-460">
                         <div className="lg:flex px-4 leading-none " >
@@ -35,7 +33,7 @@ function MoviePanel(props) {
                                 <img
                                     src={movie.poster}
                                     alt="pic"
-                                    className="xs:m-auto h-70 w-56 rounded-md  border-4 border-gray-300 shadow-lg "
+                                    className="xs:m-auto h-70 w-56 rounded-md   shadow-lg "
                                 />
 
                             </div>
@@ -48,10 +46,10 @@ function MoviePanel(props) {
                                     <span className="font-bold"> {movie.runtime} min | {movie.genres.join(", ")}</span>
                                     <span className="font-bold"></span>
                                 </div>
-                                <p className="  my-4 text-justify text-sm text-left"> {movie.fullplot} </p>
+                                <p className="  my-4 text-justify text-sm "> {movie.fullplot ? movie.fullplot : movie.plot} </p>
 
                                 <div className="text-left  text-md  my-8">
-                                    <span className='block '>Released: {movie.lastupdated.substring(0, 10)}</span>
+                                    <span className='block '>Released: {movie.released.substring(0, 10)}</span>
                                     <span className='block'>Languages: {movie.languages.join(", ")}</span>
                                     <span className='block'>Countries: {movie.countries.join(", ")}</span>
                                 </div>
@@ -64,18 +62,19 @@ function MoviePanel(props) {
 
                                 <div className='text-left'>
                                     <h3 className='font-bold text-lg'>Directors</h3>
-                                    {movie.directors.join(", ")}
+                                    {movie.directors.length ? movie.directors.join(", ") : <p>no data</p>}
                                 </div>
 
                                 <div className='text-left mt-5'>
                                     <h3 className='font-bold text-lg'>Cast</h3>
-                                    {movie.cast.join(", ")}
+                                    {movie.cast.length ? movie.cast.join(", ") : <p>no data</p>}
                                 </div>
+
                                 <div className='text-left mt-5'>
                                     <h3 className='font-bold text-lg'>Writers</h3>
-                                    {movie.writers.join(", ")}
+                                    {movie.writers.length ? movie.writers.join(", ") : <p>no data</p>}
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
