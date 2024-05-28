@@ -6,9 +6,14 @@ export default {
   theme: {
     extend: {
       spacing: {
-        '460': '460px'
-      }
+        '460': '460px',
+        '2px': '2px'
+      },
+      colors: {
+        app: '#1F2937',
+      },
     },
+    
     screens: {
       'xs': '100px',
       // => @media (min-width: 100px) { ... }
