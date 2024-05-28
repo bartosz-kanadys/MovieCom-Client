@@ -6,11 +6,11 @@ function Movie(props) {
 
             <div className="xs:min-w-96 bg-white rounded-md shadow-lg max-w-2xl min-h-460">
                 <div className="lg:flex px-4 leading-none " >
-                    <div className="flex-none  ">
+                    <div className="flex-none mt-5 ">
                         <img
                             src={props.poster}
                             alt="pic"
-                            className="xs:m-auto h-70 w-56 rounded-md  transform -translate-y-4 border-4 border-gray-300 shadow-lg"
+                            className="xs:m-auto h-70 w-56 rounded-md  border-4 border-gray-300 shadow-lg "
                         />
                         <p className='w-full'>
                             <a href="#" className="items-center justify-center flex mb-4 mt-7 m-auto w-full text-white bg-blue-700    font-bold rounded-lg text-lg p-3  dark:hover:bg-blue-900 ">Comments</a>
@@ -20,7 +20,7 @@ function Movie(props) {
                     <div className="flex-col text-gray-800 ">
 
                         <p className="pt-4 text-2xl font-bold">{props.title} ({props.year})</p>
-                        <hr className="hr-text" data-content=""></hr>
+                        <hr className="w-11/12 h-2px mx-auto  border-0 rounded md:my-5 dark:bg-gray-700" data-content=""></hr>
                         <div className="text-md flex justify-between px-4 my-2">
                             <span className="font-bold"> {props.runtime} min | {props.genres}</span>
                             <span className="font-bold"></span>
