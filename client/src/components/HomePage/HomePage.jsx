@@ -43,7 +43,7 @@ function HomePage() {
 
     return (
         <>
-            <Header search={search} setSearch={setSearch}></Header>
+            <Header search={search} setSearch={setSearch} isSearch={true}></Header>
             <div >
                 <InfiniteScroll
                     dataLength={allMovies.length}
