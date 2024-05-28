@@ -1,16 +1,24 @@
 const mongoose = require('mongoose');
 
 const commentSchema = new mongoose.Schema({
-    userLogin: {
+    movieId: {
+        type: String,
+        required: true
+    },
+    user: {
         type: String,
         required: true
     },
     createdAt: {
-        type: Date,
+        type: String,
         required: true
     },
     content: {
         type: String,
+        required: true
+    },
+    rating: {
+        type: Number,
         required: true
     }
   });

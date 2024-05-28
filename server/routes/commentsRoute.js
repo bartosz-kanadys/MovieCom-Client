@@ -4,7 +4,8 @@ const commentController = require('../controllers/commentController');
 var router = express.Router();
 
 router.get('/', commentController.getAll);
-router.get('/:login', commentController.getbyUser)
+router.get('/login/:login', commentController.getbyUser)
+router.get('/movieID/:movieID', commentController.getbyMovieId)
 
 router.post('/', commentController.create)
 
