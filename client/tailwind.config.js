@@ -6,7 +6,7 @@ export default {
   theme: {
     extend: {
       spacing: {
-        '460': '460px',
+        '440px': '440px',
         '2px': '2px'
       },
       colors: {
