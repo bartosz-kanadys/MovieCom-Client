@@ -36,10 +36,12 @@ function LoginPage() {
                                 onChange={() => setPassword(event.target.value)}
                             />
                         </form>
-                        <button onClick={() => auth.loginAction(login, password)} className="bg-blue-800 w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
+                        <button onClick={() => auth.loginAction(login, password)} className="bg-blue-800 w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                            Sign in
+                        </button>
 
                         <p>
-                            {!auth.loginSucces ? <p>Login failed</p> : <></>}
+                            {!auth.loginSucces ? <p className="text-white">Login failed</p> : <></>}
                         </p>
 
                         <p className="text-sm font-light text-gray-500 dark:text-gray-400">
