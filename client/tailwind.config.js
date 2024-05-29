@@ -8,7 +8,9 @@ export default {
       spacing: {
         '440px': '440px',
         '2px': '2px',
-        '1px': '1px'
+        '1px': '1px',
+        '94%': '94%',
+        '90%': '85%'
       },
       colors: {
         app: '#1F2937',
