@@ -61,6 +61,7 @@ module.exports = {
             res.status(200).json({msg: "Comment deleted"})
         } catch (error) {
             res.status(500).json({error: "Internal error server"})
+            console.log(error)
         }
     },
 

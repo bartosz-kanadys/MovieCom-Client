@@ -11,9 +11,9 @@ router.post('/', commentController.create)
 
 router.put('/', commentController.update)
 
-router.delete('/',
+router.delete('/:id',
   authorizationController.authenticate,
-  authorizationController.checkRole(['admin']),
+  //authorizationController.checkRole(['admin']),
   commentController.delete
 )
 
