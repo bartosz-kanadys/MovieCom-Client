@@ -4,6 +4,7 @@ import Movie from '../MovieCard/MovieCard';
 import '../../App.css'
 import Header from '../Header/Header';
 import InfiniteScroll from "react-infinite-scroll-component";
+import checkToken from '../Auth/checkToken';
 
 function HomePage() {
     const [allMovies, setAllMovies] = useState([])
@@ -13,10 +14,12 @@ function HomePage() {
 
     useEffect(() => {
         fetchData()
+        checkToken()
     }, [])
 
     useEffect(() => {
         fetchData()
+        checkToken()
     }, [search])
 
     const fetchData = () => {

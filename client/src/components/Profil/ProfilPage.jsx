@@ -2,6 +2,7 @@ import Header from "../Header/Header"
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 import React, { useEffect, useState } from 'react'
+import checkToken from "../Auth/checkToken";
 
 
 function ProfilPage() {
@@ -16,6 +17,7 @@ function ProfilPage() {
         } else {
             setTokenData(null)
         }
+        checkToken
     }, [])
 
     return (
@@ -32,7 +34,7 @@ function ProfilPage() {
                 <div className=" text-3xl font-bold pt-5">
                     <p>{tokenData.login}</p>
                     <p className="text-lg font-normal mt-3">{tokenData.email}</p>
-                    <p className="text-lg font-normal mt-3">Role: {tokenData.role.join(", ")}</p>
+                    <p className="text-lg font-normal mt-3">Role: {JSON.stringify(tokenData.role)}</p>
                 </div>
 
             </div>

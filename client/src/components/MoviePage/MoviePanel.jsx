@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react'
 import '../MovieCard/movieCard.css'
 import axios from 'axios';
+import checkToken from '../Auth/checkToken';
 
-function MoviePanel(props) {
+function MoviePanel({id}) {
     const [movie, setMovie] = useState(null)
 
     useEffect(() => {
         fetchData()
+        checkToken
     }, [])
 
     const fetchData = async () => {
         const fetchData = async () => {
-            const response = await axios.get(`http://localhost:9000/movies/id/${props.id}`)
+            const response = await axios.get(`http://localhost:9000/movies/id/${id}`)
             setMovie(response.data)
-            console.log(response)
         }
 
         fetchData()

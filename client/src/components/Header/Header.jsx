@@ -5,6 +5,7 @@ import LoggedButtons from "./LoggedButtons"
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
+import checkToken from "../Auth/checkToken";
 
 function Header({ search, setSearch, isSearch }, props) {
     const [tokenData, setTokenData] = useState({ login: "" })
@@ -25,22 +26,24 @@ function Header({ search, setSearch, isSearch }, props) {
         } else {
             setTokenData(null)
         }
+        checkToken()
     }, [])
 
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-            if (tokenData != null) {
+    // useEffect(() => {
+    //     const intervalId = setInterval(() => {
+    //         if (tokenData != null) {
 
-                if (Date.now() >= tokenData.exp) {
-                    //axios.post('http://localhost:9000/logout',{ withCredentials: true })
-                    Cookies.set("JWT", "")
-                }
-            }
+    //             if (Date.now() >= tokenData.exp) {
+    //                 //axios.post('http://localhost:9000/logout',{ withCredentials: true })
+    //                 Cookies.set("JWT", "")
+                    
+    //             }
+    //         }
 
-        }, 1000);
+    //     }, 1000);
 
-        return () => clearInterval(intervalId)
-    }, []);
+    //     return () => clearInterval(intervalId)
+    // }, []);
 
     return (
         <header className="min-w-96 ... sticky top-0">
