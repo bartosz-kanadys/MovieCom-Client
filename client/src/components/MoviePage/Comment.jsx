@@ -1,21 +1,60 @@
+import { useState } from 'react'
 import '../MovieCard/movieCard.css'
+import { useEffect } from 'react'
+import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
+import axios from 'axios'
 
-function Comment(props) {
+function Comment({ id, login, content, rating, onDelete }) {
+    const [user, setUser] = useState(null)
+    const [isAdmin, setIsAdmin] = useState(false)
+
+    useEffect(() => {
+        const token = Cookies.get('JWT')
+        if (token) {
+            const decodedToken = jwtDecode(token)
+            setUser(decodedToken.login)
+            setIsAdmin(decodedToken.role.includes('admin'));
+        }
+    }, [])
+
+    const deleteComment = async () => {
+        try {
+            await axios.delete(`http://localhost:9000/comments/${id}`, { withCredentials: true });
+            onDelete(id)
+        } catch (error) {
+            console.error('Error deleting comment:', error);
+        }
+    }
+
     return (
         <div className=' flex'>
             <div className='float-left'>
-                <img src="https://t4.ftcdn.net/jpg/04/10/43/77/360_F_410437733_hdq4Q3QOH9uwh0mcqAhRFzOKfrCR24Ta.jpg"
+                <img
+                    src="https://t4.ftcdn.net/jpg/04/10/43/77/360_F_410437733_hdq4Q3QOH9uwh0mcqAhRFzOKfrCR24Ta.jpg"
                     className='max-w-20 rounded-lg border-2 border-app mx-6 mt-6'>
                 </img>
                 <p className='mt-1'>
-                    {props.user}
+                    {login}
                 </p>
             </div>
             <div className='text-left w-full float-left p-3 mt-6 border-2 border-app rounded-lg'>
-                <p>{props.content}</p>
+                <p>{content}</p>
+                {
+                    login == user || isAdmin ?
+                        <img
+                            onClick={deleteComment}
+                            className='relative xs:left-90% sm:left-94% top-7  h-8 w-8 bg-red-400 p-2 rounded-md'
+                            src="https://static-00.iconduck.com/assets.00/delete-icon-1864x2048-bp2i0gor.png">
+                        </img>
+                        :
+                        <></>
+                }
             </div>
-            <div className='bg-app flex items-center justify-center  rounded-lg mt-6 mr-6 ml-4 w-2/12 text-white font-bold text-3xl'>
-                {props.rating}/10
+
+
+            <div className='bg-app  flex items-center justify-center  rounded-lg mt-6 mr-6 ml-4 w-2/12 text-white font-bold text-3xl'>
+                {rating}/10
             </div>
         </div>
     )

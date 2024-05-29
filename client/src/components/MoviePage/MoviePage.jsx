@@ -4,8 +4,10 @@ import '../MovieCard/movieCard.css'
 import MoviePanel from './MoviePanel';
 import CommentsPanel from './CommentsPanel';
 import AddComment from './AddComment'
+import { useState } from 'react';
 
 function MoviePage() {
+    const [hasBenAdded, setHasBenAdded] = useState(1)
 
     let { id } = useParams();
 
@@ -13,8 +15,8 @@ function MoviePage() {
         <>
             <Header isSearch={false}></Header>
             <MoviePanel id={id}></MoviePanel>
-            <CommentsPanel id={id}></CommentsPanel>
-            <AddComment></AddComment>
+            <CommentsPanel id={id} hasBenAdded={hasBenAdded}></CommentsPanel>
+            <AddComment id={id}  setHasBenAdded={setHasBenAdded}></AddComment>
         </>
     )
 }

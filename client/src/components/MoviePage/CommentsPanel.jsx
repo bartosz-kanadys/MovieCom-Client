@@ -2,24 +2,29 @@ import { useEffect, useState } from 'react'
 import '../MovieCard/movieCard.css'
 import Comment from './Comment';
 import axios from 'axios';
+import checkToken from '../Auth/checkToken';
 
-function CommentsPanel(props) {
+
+function CommentsPanel({ id, hasBenAdded }) {
     const [comments, setComments] = useState([])
 
     useEffect(() => {
         fetchData()
-        console.log(comments)
-    }, [])
+        checkToken
+    }, [hasBenAdded])
 
     const fetchData = async () => {
-        const fetchData = async () => {
-            const response = await axios.get(`http://localhost:9000/comments/movieID/${props.id}`)
-            setComments(response.data)
-            console.log(response)
+        try {
+            const response = await axios.get(`http://localhost:9000/comments/movieID/${id}`);
+            setComments(response.data);
+        } catch (error) {
+            console.error('Error fetching comments:', error);
         }
-
-        fetchData()
     }
+
+    const handleCommentDelete = (commentId) => {
+        setComments(comments.filter(comment => comment._id !== commentId));
+    };
 
     return (
         <div className='p-5'>
@@ -28,9 +33,11 @@ function CommentsPanel(props) {
                     comments.map(comment => {
                         return (
                             <Comment
-                                user={comment.user}
+                                id={comment._id}
+                                login={comment.user}
                                 content={comment.content}
                                 rating={comment.rating}
+                                onDelete={handleCommentDelete}
                             />
                         )
                     })
