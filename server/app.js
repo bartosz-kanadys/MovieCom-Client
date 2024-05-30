@@ -16,10 +16,7 @@ const app = express();
 const mongo = require('./database/mongo_connection');
 
 // CORS configuration
-app.use(cors({
-  origin: 'http://localhost:5173', 
-  credentials: true,
-}));
+
 
 // Middleware to set headers for all responses
 app.use((req, res, next) => {
@@ -34,6 +31,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// CORS configuration
+app.use(cors({
+  origin: 'http://localhost:5173', 
+  credentials: true,
+}));
 
 // Routes
 app.use('/', authorizationRouter);
