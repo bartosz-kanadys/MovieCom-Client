@@ -70,7 +70,7 @@ function RegisterPage() {
             })
                 .then((response) => {
                     setServerData(response)
-                    console.log(response)
+                    //console.log(response)
                 })
                 .catch(err => {
                     console.log(err)
@@ -135,7 +135,7 @@ function RegisterPage() {
                                 {errors.password == null ? <></> : <span>{errors.password}<br></br></span>}
                             </p>
                             <p>
-                                {serverData ? <p>{serverData.data.message}</p> : <></>}
+                                {serverData ? <p className='text-white font-bold text-lg'>{serverData.data.message}</p> : <></>}
                             </p>
 
                         </form>
