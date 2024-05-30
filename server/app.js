@@ -1,59 +1,63 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const cors = require('cors');
 
-var usersRouter = require('./routes/usersRoute');
-var moviesRouter = require("./routes/moviesRoute");
-var authorizationRouter = require('./routes/authorizationRoute')
-var commentRouter = require('./routes/commentsRoute')
+const usersRouter = require('./routes/usersRoute');
+const moviesRouter = require("./routes/moviesRoute");
+const authorizationRouter = require('./routes/authorizationRoute');
+const commentRouter = require('./routes/commentsRoute');
 
-var app = express();
+const app = express();
 
-const mongo = require('./database/mongo_connection')
+// Database connection
+const mongo = require('./database/mongo_connection');
 
+// CORS configuration
+app.use(cors({
+  origin: 'http://localhost:5173', 
+  credentials: true,
+}));
 
-
-app.use(function(req, res, next) {
+// Middleware to set headers for all responses
+app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', "http://localhost:9000");
   res.header('Access-Control-Allow-Credentials', true);
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors({
-  origin: 'http://localhost:5173', // Zmień na adres swojej aplikacji frontendowej
-  credential: true
-}));
+
+// Routes
 app.use('/', authorizationRouter);
 app.use('/users', usersRouter);
-app.use("/movies", moviesRouter);
-app.use('/comments', commentRouter)
+app.use('/movies', moviesRouter);
+app.use('/comments', commentRouter);
 
-
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404))
+// Catch 404 and forward to error handler
+app.use((req, res, next) => {
+  next(createError(404));
 });
 
-// error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
+// Error handler
+app.use((err, req, res, next) => {
+  // Set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
+  // Render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json({
+    message: err.message,
+    error: res.locals.error,
+  });
 });
 
 module.exports = app;
