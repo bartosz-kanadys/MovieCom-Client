@@ -29,22 +29,6 @@ function Header({ search, setSearch, isSearch }, props) {
         checkToken()
     }, [])
 
-    // useEffect(() => {
-    //     const intervalId = setInterval(() => {
-    //         if (tokenData != null) {
-
-    //             if (Date.now() >= tokenData.exp) {
-    //                 //axios.post('http://localhost:9000/logout',{ withCredentials: true })
-    //                 Cookies.set("JWT", "")
-                    
-    //             }
-    //         }
-
-    //     }, 1000);
-
-    //     return () => clearInterval(intervalId)
-    // }, []);
-
     return (
         <header className="min-w-96 ... sticky top-0">
             <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">

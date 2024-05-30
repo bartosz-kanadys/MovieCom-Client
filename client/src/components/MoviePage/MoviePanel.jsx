@@ -161,8 +161,8 @@ function MoviePanel({ id }) {
             }
             {
                 movie && isForm ?
-                    <div className="px-5 pt-5 grid place-items-center font-mono ">
-                        <div className="xs:min-w-96 bg-white rounded-md shadow-lg max-w-5xl min-h-460">
+                    <div className="bg-white max-w-5xl m-auto rounded-md pb-5 font-mono ">
+                        <div className=" rounded-md  min-h-460">
                             <div className="lg:flex px-4 leading-none " >
                                 <div className="flex-none mt-5 ">
                                     <img
@@ -171,7 +171,7 @@ function MoviePanel({ id }) {
                                         className="xs:m-auto h-70 w-56 rounded-md   shadow-lg "
                                     />
                                 </div>
-                                <div className="flex-col px-4 pb-9 text-gray-800 ">
+                                <div className="flex-col px-4 pb-9 w-full text-gray-800 ">
                                     <form>
                                         <input id='title' type='text' className="pt-4 text-2xl font-bold w-3/5" onChange={() => setTitle(event.target.value)} value={title}></input>
 
