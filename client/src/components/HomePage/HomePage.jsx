@@ -22,25 +22,23 @@ function HomePage() {
         checkToken()
     }, [search])
 
-    const fetchData = () => {
-        const fetchData = async () => {
-            const response = await axios.get(`http://localhost:9000/movies/limit/?limit=6&skip=0&title=${search}`)
-            setAllMovies(response.data)
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(`http://localhost:9000/movies/limit/?limit=6&skip=0&title=${search}`);
+            setAllMovies(response.data);
+        } catch (error) {
+            console.error("Error fetching data:", error);
         }
-
-        fetchData()
     }
 
     const fetchMoreData = () => {
-        axios
-            .get(`http://localhost:9000/movies/limit/?limit=6&skip=${index}&title=${search}`)
+        axios.get(`http://localhost:9000/movies/limit/?limit=6&skip=${index}&title=${search}`)
             .then((res) => {
                 setAllMovies((prevItems) => [...prevItems, ...res.data]);
 
                 res.data.length > 0 ? setHasMore(true) : setHasMore(false);
             })
             .catch((err) => console.log(err));
-
         setIndex((prevIndex) => prevIndex + 6);
     };
 
@@ -53,7 +51,6 @@ function HomePage() {
                     next={fetchMoreData}
                     hasMore={hasMore}
                 >
-
                     {allMovies.length > 0 ?
                         <>
                             <div href="/" id='main' className="grid  md:grid-cols-2 gap-1 p-1 max-w-7xl  ">
