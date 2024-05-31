@@ -15,10 +15,8 @@ module.exports = {
 
     async getbyUser(req, res) {
         try {
-            const comments = await Comment.find({ login: req.params.login });
-            if (comments.length === 0) {
-                return res.status(404).json({ error: "No comments found for this user" });
-            }
+            const comments = await Comment.find({ user: req.params.login });
+            
             res.status(200).json(comments);
         } catch (error) {
             res.status(500).json({ error: "Internal server error" });
@@ -28,9 +26,7 @@ module.exports = {
     async getbyMovieId(req, res) {
         try {
             const comments = await Comment.find({ movieId: req.params.movieID });
-            if (comments.length === 0) {
-                return res.status(404).json({ error: "No comments found for this movie" });
-            }
+            
             res.status(200).json(comments);
         } catch (error) {
             res.status(500).json({ error: "Internal server error" });
@@ -55,9 +51,7 @@ module.exports = {
 
         try {
             const updatedComment = await Comment.findOneAndUpdate(filter, update, { new: true });
-            if (!updatedComment) {
-                return res.status(404).json({ error: "Comment not found" });
-            }
+           
             res.status(200).json({ message: "Comment updated successfully", comment: updatedComment });
         } catch (error) {
             res.status(500).json({ error: "Internal server error" });
@@ -67,9 +61,7 @@ module.exports = {
     async delete(req, res) {
         try {
             const comment = await Comment.findByIdAndDelete(req.params.id);
-            if (!comment) {
-                return res.status(404).json({ error: "Comment not found" });
-            }
+            
             res.status(200).json({ message: "Comment deleted successfully" });
         } catch (error) {
             res.status(500).json({ error: "Internal server error" });
