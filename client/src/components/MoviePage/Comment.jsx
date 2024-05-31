@@ -39,12 +39,12 @@ function Comment({ id, login, content, rating, onDelete }) {
                 </p>
             </div>
             <div className='text-left w-full float-left p-3 mt-6 border-2 border-app rounded-lg'>
-                <p>{content}</p>
+                <p className=''>{content}</p>
                 {
                     login == user || isAdmin ?
                         <img
                             onClick={deleteComment}
-                            className='relative xs:left-90% sm:left-94% top-7  h-8 w-8 bg-red-400 p-2 rounded-md'
+                            className='relative float-right align-bottom  h-8 w-8 bg-red-400 p-2 rounded-md'
                             src="https://static-00.iconduck.com/assets.00/delete-icon-1864x2048-bp2i0gor.png">
                         </img>
                         :
