@@ -25,7 +25,7 @@ function CommentsPanel({ setHasBenAdded, id }) {
                 content,
                 rating
             }, { withCredentials: true })
-            if (response.status == 200) {
+            if (response.status == 201) {
                 setserverResponse(response.data.message)
                 document.getElementById("addCommentForm").reset();
                 setHasBenAdded(prevCount => prevCount + 1)
