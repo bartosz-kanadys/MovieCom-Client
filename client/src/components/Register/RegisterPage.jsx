@@ -62,7 +62,8 @@ function RegisterPage() {
             }
         }, [login])
 
-    const register = () => {
+    const register = (event) => {
+        event.preventDefault()
         if (
             errors.email == null &&
             errors.login == null &&
@@ -93,7 +94,7 @@ function RegisterPage() {
                     <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-400">
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
 
-                            <form className="space-y-4 md:space-y-6" >
+                            <form className="space-y-4 md:space-y-6" method='post' onSubmit={register} >
                                 <Input
                                     label="Login"
                                     type="text"
@@ -106,7 +107,7 @@ function RegisterPage() {
                                     type="email"
                                     id="email"
                                     placeholder="mail@example.com"
-                                    onChange={() => setPassword(event.target.value)}
+                                    onChange={() => setEmail(event.target.value)}
                                 />
 
                                 <Input
@@ -114,7 +115,7 @@ function RegisterPage() {
                                     type="password"
                                     id="password"
                                     placeholder="**********"
-                                    onChange={() => setEmail(event.target.value)}
+                                    onChange={() => setPassword(event.target.value)}
                                 />
                                 <p className='text-white'>
                                     {errors.login == null ? <></> : <span>{errors.login}<br></br></span>}
@@ -124,9 +125,9 @@ function RegisterPage() {
                                 <p>
                                     {serverData ? <p className='text-white font-bold text-lg'>{serverData.data.message}</p> : <></>}
                                 </p>
-
+                                <input type="submit" value='Sign in' className="bg-blue-800 w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"></input>
                             </form>
-                            <button onClick={register} className="bg-blue-800 w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
+                            
                             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                                 You have an account? <a href="/login" className="font-medium text-primary-600 hover:underline dark:text-primary-500 ml-4">Login</a>
                             </p>
