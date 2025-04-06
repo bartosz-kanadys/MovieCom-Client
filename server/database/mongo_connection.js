@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const MONGO_URI = 'mongodb://root:root@localhost:27017/project_js?authSource=admin';
+const MONGO_URI = 'mongodb://root:root@localhost:27017/projekt?authSource=admin';
 
 mongoose.connect(MONGO_URI)
     .then(() => {
