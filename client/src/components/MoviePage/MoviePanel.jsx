@@ -28,7 +28,7 @@ function MoviePanel({ id }) {
         const token = Cookies.get('JWT')
         if (token) {
             const decodedToken = jwtDecode(token)
-            setIsAdmin(decodedToken.role.includes('admin'));
+            setIsAdmin(decodedToken.role.includes('ROLE_ADMIN'));
         }
         fetchData()
         checkToken
@@ -65,6 +65,8 @@ function MoviePanel({ id }) {
     }
 
     const update = async () => {
+        const token = Cookies.get('JWT')
+    
         let toUpdate = {
             title: title,
             year: year,
@@ -80,12 +82,20 @@ function MoviePanel({ id }) {
             cast: JSON.parse(cast),
             writers: JSON.parse(writers)
         }
-        console.log(id)
+        console.log("ssss")
+        console.log(toUpdate)
+        console.log("ssss")
         try {
-            const response = await axios.put(`http://localhost:9000/movies`,
+            const response = await axios.put(`http://localhost:9000/movies/${id}`,
                 {
-                    filter: { _id: id },
-                    update: toUpdate
+                    // filter: { _id: id },
+                    movieDTO: toUpdate,
+                },
+                {
+                    withCredentials: true,
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
                 });
             console.log(response)
             setIsForm(false)

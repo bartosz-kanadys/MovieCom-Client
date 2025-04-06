@@ -24,7 +24,11 @@ function CommentsPanel({ setHasBenAdded, id }) {
                 createdAt,
                 content,
                 rating
-            }, { withCredentials: true })
+            }, { withCredentials: true,
+                headers: {
+                    Authorization: `Bearer ${token}`
+                    }
+             })
             if (response.status == 201) {
                 setserverResponse(response.data.message)
                 document.getElementById("addCommentForm").reset();

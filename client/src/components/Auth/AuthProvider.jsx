@@ -21,6 +21,7 @@ const AuthProvider = ({ children }) => {
                 if (response.data.success) {
                     setUser(response.data.login)
                     setLoginSucces(true)
+                    Cookies.set("JWT", response.data.token)
                     navigate("/");
                     console.log(response)
                 } else {
@@ -29,6 +30,7 @@ const AuthProvider = ({ children }) => {
 
             })
             .catch(err => {
+                setLoginSucces(false)
                 console.log(err)
             })
     }

@@ -14,13 +14,19 @@ function Comment({ id, login, content, rating, onDelete }) {
         if (token) {
             const decodedToken = jwtDecode(token)
             setUser(decodedToken.login)
-            setIsAdmin(decodedToken.role.includes('admin'));
+            setIsAdmin(decodedToken.role.includes('ROLE_ADMIN'));
         }
     }, [])
 
     const deleteComment = async () => {
+        const token = Cookies.get('JWT')
         try {
-            await axios.delete(`http://localhost:9000/comments/${id}`, { withCredentials: true });
+            await axios.delete(`http://localhost:9000/comments/${id}`, {        
+                withCredentials: true,
+                headers: {
+                    Authorization: `Bearer ${token}`
+                    }
+            });
             onDelete(id)
         } catch (error) {
             console.error('Error deleting comment:', error);

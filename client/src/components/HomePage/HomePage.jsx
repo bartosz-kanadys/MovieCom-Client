@@ -9,7 +9,7 @@ import checkToken from '../Auth/checkToken';
 function HomePage() {
     const [allMovies, setAllMovies] = useState([])
     const [hasMore, setHasMore] = useState(true);
-    const [index, setIndex] = useState(6);
+    const [index, setIndex] = useState(1);
     const [search, setSearch] = useState("")
 
     useEffect(() => {
@@ -24,15 +24,19 @@ function HomePage() {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get(`http://localhost:9000/movies/limit/?limit=6&skip=0&title=${search}`);
+            // const response = await axios.get(`http://localhost:9000/movies/limit/?limit=6&skip=0&title=${search}`);
+            const response = await axios.get(`http://localhost:9000/movies/limit?title=${search}&pageNumber=0&pageSize=6`);
+            console.log(allMovies)
             setAllMovies(response.data);
         } catch (error) {
             console.error("Error fetching data:", error);
+            setAllMovies([]);
         }
     }
 
     const fetchMoreData = () => {
-        axios.get(`http://localhost:9000/movies/limit/?limit=6&skip=${index}&title=${search}`)
+        axios.get(`http://localhost:9000/movies/limit?title=${search}&pageNumber=${index}&pageSize=6`)
+        // axios.get(`http://localhost:9000/movies/limit/?limit=6&skip=${index}&title=${search}`)
             .then((res) => {
                 setAllMovies((prevItems) => [...prevItems, ...res.data]);
 
