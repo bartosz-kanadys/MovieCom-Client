@@ -1,4 +1,5 @@
 # Project Overview
+MovieCom is a web application for managing movies and comments, equipped with a user registration/login system, user authorization, and administrative panels. The project is built using React.js (frontend), Express.js (backend), and MongoDB (database).
 
 ## Client
 - **Language**: JavaScript
